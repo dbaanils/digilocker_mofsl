@@ -1,26 +1,19 @@
-import 'dart:io';
-
-import 'package:ainxt_digilocker_mod/screens/ainxt_digi_locker_sdk_screen.dart';
 import 'package:flutter/material.dart';
-
-
 import 'screens/digi_locker_screen.dart';
 
 class AinxtDigilockerPlugin {
-  AiNxtDigiLockerPlugin(){
+  AiNxtDigiLockerPlugin() {
     WidgetsFlutterBinding.ensureInitialized();
   }
 
   Future<dynamic> init(
-      BuildContext context,
-      String platform,
-      String sdkAppBarTitle,
-      String redirectURL,
-      String redirectURLHost,
-      String secretKey,
-      ) async {
-
-
+    BuildContext context,
+    String platform,
+    String sdkAppBarTitle,
+    String redirectURL,
+    String redirectURLHost,
+    String secretKey,
+  ) async {
     //Open a modal dialog from bottom of the screen
     return await showModalBottomSheet(
       isScrollControlled: true,
@@ -33,23 +26,24 @@ class AinxtDigilockerPlugin {
       context: (context),
       builder: (context) {
         return Padding(
-          padding: EdgeInsets.only(
-              top: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                  .padding
-                  .top),
-          child: getWidget(context,platform,sdkAppBarTitle, redirectURL, redirectURLHost, secretKey)
-
-        );
+            padding: EdgeInsets.only(
+                top: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                    .padding
+                    .top),
+            child: getWidget(context, platform, sdkAppBarTitle, redirectURL,
+                redirectURLHost, secretKey));
       },
     );
   }
 
-  Widget? getWidget(BuildContext context,
-      String? platform,
-      String? sdkAppBarTitle,
-      String? redirectURL,
-      String? redirectURLHost,
-      String? secretKey,){
+  Widget? getWidget(
+    BuildContext context,
+    String? platform,
+    String? sdkAppBarTitle,
+    String? redirectURL,
+    String? redirectURLHost,
+    String? secretKey,
+  ) {
     Widget? localWidget;
 
     /*if(Platform.isIOS){
@@ -77,16 +71,16 @@ class AinxtDigilockerPlugin {
     }*/
 
     localWidget = DigiLockerScreen(
-      platform:  platform,
-      sdkAppBarTitle:  sdkAppBarTitle!,
-      redirectURL:  redirectURL!,
-      redirectURLHost:  redirectURLHost!,
-      secretKey:  secretKey!,
-      onCompletion: (String? accessRequestId) {
+      platform: platform,
+      sdkAppBarTitle: sdkAppBarTitle!,
+      redirectURL: redirectURL!,
+      redirectURLHost: redirectURLHost!,
+      secretKey: secretKey!,
+      onCompletion: (BuildContext context, String? accessRequestId) {
         Navigator.pop(context, accessRequestId);
-      },);
+      },
+    );
 
     return localWidget;
   }
-
 }
