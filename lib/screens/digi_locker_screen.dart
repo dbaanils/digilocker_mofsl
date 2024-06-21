@@ -20,17 +20,17 @@ class DigiLockerScreen extends StatefulWidget {
   String? redirectURLHost;
   String? sdkAppBarTitle;
   String? secretKey;
-  Function onCompletion;
+  Function(BuildContext context, String? accessReqId) onCompletion;
 
-  DigiLockerScreen(
-      {Key? key,
-      required this.platform,
-      required this.sdkAppBarTitle,
-      required this.redirectURL,
-      required this.redirectURLHost,
-      required this.secretKey,
-      required this.onCompletion})
-      : super(key: key);
+  DigiLockerScreen({
+    Key? key,
+    required this.platform,
+    required this.sdkAppBarTitle,
+    required this.redirectURL,
+    required this.redirectURLHost,
+    required this.secretKey,
+    required this.onCompletion,
+  }) : super(key: key);
 
   @override
   State<DigiLockerScreen> createState() => _DigiLockerScreenState();
@@ -156,7 +156,8 @@ class _DigiLockerScreenState extends State<DigiLockerScreen> {
           accessIdData = null;
         }
       } else {
-        widget.onCompletion(data);
+        widget.onCompletion(context, data);
+        setState(() => pop = true);
       }
     }
   }

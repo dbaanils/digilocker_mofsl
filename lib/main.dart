@@ -38,7 +38,7 @@ Future<void> main() async {
   //       platform, sdkAppBarTitle, redirectURL, redirectURLHost, secretKey));
   // });
 //  Below code is for testing
-  platform = "IOS";
+  platform = "FLUTTER";
   sdkAppBarTitle = "MAIN.dart";
   redirectURL = "https://main.d21iupo02d286g.amplifyapp.com/digilocker";
   redirectURLHost = "main.d21iupo02d286g.amplifyapp.com";
@@ -114,7 +114,7 @@ class _MyAppState extends State<MyApp> {
       redirectURL: widget.redirectURL!,
       redirectURLHost: widget.redirectURLHost!,
       secretKey: widget.secretKey!,
-      onCompletion: (String? accessRequestId) {
+      onCompletion: (BuildContext context, String? accessRequestId) {
         Navigator.pop(context, accessRequestId);
       },
     );
