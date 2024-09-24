@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
@@ -447,8 +448,15 @@ class FaceSdkScreenState extends State<FaceSdkScreen> {
   // }
 
 //stops the image stream
+  // Future _stopLiveFeed() async {
+  //   await _controller?.stopImageStream();
+  //   await _controller?.dispose();
+  //   _controller = null;
+  // }
   Future _stopLiveFeed() async {
-    await _controller?.stopImageStream();
+    if(_controller.value.isStreamingImages){
+      await _controller?.stopImageStream();
+    }
     await _controller?.dispose();
     _controller = null;
   }
