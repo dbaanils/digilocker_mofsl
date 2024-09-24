@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
@@ -89,7 +88,6 @@ class FaceSdkScreenState extends State<FaceSdkScreen> {
       (_) async {
         if (status[Permission.camera] == PermissionStatus.granted &&
             status[Permission.location] == PermissionStatus.granted) {
-
           try {
             _position = await Geolocator.getCurrentPosition(
               desiredAccuracy: LocationAccuracy.high,
@@ -323,7 +321,8 @@ class FaceSdkScreenState extends State<FaceSdkScreen> {
         _controller!.stopImageStream();
         setState(() => _isCameraOn = false);
         try {
-          _player.setAsset('packages/ainxt_digilocker_mod/faceplugin/assets/camera_click.mp3');
+          _player.setAsset(
+              'packages/ainxt_digilocker_mod/faceplugin/assets/camera_click.mp3');
           _player.play();
           var fileImage = await _controller!.takePicture();
           var bytesImage = await fileImage.readAsBytes();
@@ -454,7 +453,7 @@ class FaceSdkScreenState extends State<FaceSdkScreen> {
   //   _controller = null;
   // }
   Future _stopLiveFeed() async {
-    if(_controller.value.isStreamingImages){
+    if (_controller?.value.isStreamingImages == true) {
       await _controller?.stopImageStream();
     }
     await _controller?.dispose();
